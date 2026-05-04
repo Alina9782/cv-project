@@ -1,18 +1,55 @@
-# CV + Portfolio Project Structure
+# Front-End CV + Portfolio
 
-## Pages
-- `index.html` - Main CV page
-- `portfolio.html` - Portfolio page with project cards
+Personal website project with two static pages:
 
-## Assets
-- `assets/css/portfolio.css` - Styling for portfolio page
-- `assets/img/` - Images (profile photos, project screenshots, icons)
-- `assets/js/` - Optional scripts for future interactivity
+- CV page (`index.html`)
+- Portfolio page (`portfolio.html`)
 
-## Portfolio Content
-- `projects/` - Optional place for per-project files or case studies
+Built with plain HTML and CSS for fast loading, simple maintenance, and easy deployment to Vercel.
 
-## Next Customization Steps
-1. Move CV image assets (`CV-img.png`, `bg-img.png`, `favicon.ico`) into `assets/img/`.
-2. Update image paths in `index.html` after moving files.
-3. Replace placeholder `#` links in `portfolio.html` with real demo and GitHub URLs.
+## Project Structure
+
+```text
+cv_project/
+├─ index.html
+├─ portfolio.html
+├─ vercel.json
+├─ assets/
+│  ├─ css/
+│  │  └─ portfolio.css
+│  ├─ img/
+│  │  ├─ favicon.ico (or favicon.svg)
+│  │  └─ ...images
+│  └─ js/
+└─ projects/
+```
+
+## Local Preview
+
+Open `index.html` directly in browser, or run a local server:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open: `http://localhost:8000`
+
+## Customize Content
+
+### CV page (`index.html`)
+
+- Update summary, skills, and experience text.
+- Verify contact links (`mailto:`, `tel:`, LinkedIn, GitHub).
+- Check asset paths for `CV-img.png`, `bg-img.png`, and favicon.
+
+### Portfolio page (`portfolio.html`)
+
+- Replace placeholder projects with real ones.
+- For each card, update:
+  - title
+  - stack (`meta` line)
+  - description
+  - bullet points
+  - `Live Demo` and `Source Code` links
+
+## Deployment (Vercel)
