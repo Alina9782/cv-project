@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotenko-Tymkiv Alina — Front-End Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --header-bg: #141c28;
+            --header-overlay: rgba(20, 28, 40, 0.88);
+            --sidebar-blue: #d6e6f2;
+            --sidebar-text: #1a1a1a;
+            --sidebar-heading: #111;
+            --main-bg: #ffffff;
+            --rule: #b8c9d6;
+            --main-rule: #c5c5c5;
+            --ink: #1a1a1a;
+            --muted: #3d3d3d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Montserrat", system-ui, sans-serif;
+            font-size: 9.5pt;
+            line-height: 1.45;
+            color: var(--ink);
+            background: #b0b0b0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page-wrap {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px 40px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .cv {
+            width: 100%;
+            max-width: 794px;
+            min-height: 1123px;
+            display: flex;
+            background: var(--main-bg);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* ——— Left rail: photo band + blue sidebar ——— */
+        .left-rail {
+            width: 32%;
+            min-width: 220px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            background: var(--sidebar-blue);
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .photo-band {
+            position: relative;
+            height: 132px;
+            flex-shrink: 0;
+            background: var(--sidebar-blue);
+        }
+
+        .avatar {
+            position: absolute;
+            left: 50%;
+            bottom: -72px;
+            transform: translateX(-50%);
+            width: 144px;
+            height: 144px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 4px solid #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+        }
+
+        .sidebar-inner {
+            flex: 1;
+            padding: 88px 18px 28px 18px;
+            color: var(--sidebar-text);
+        }
+
+        .sb-block {
+            margin-bottom: 20px;
+        }
+
+        .sb-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .sb-title {
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--sidebar-heading);
+            margin: 0 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 8.5pt;
+            line-height: 1.4;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-item svg {
+            flex-shrink: 0;
+            width: 15px;
+            height: 15px;
+            margin-top: 1px;
+            color: var(--sidebar-heading);
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contact-item svg.icon-fill {
+            stroke: none;
+            fill: currentColor;
+        }
+
+        .contact-item a {
+            color: var(--sidebar-text);
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .edu-line {
+            font-weight: 700;
+            font-size: 9.5pt;
+            margin-bottom: 4px;
+        }
+
+        .edu-place {
+            font-size: 8.5pt;
+            margin-bottom: 4px;
+            color: var(--muted);
+        }
+
+        .edu-dates {
+            font-size: 8.5pt;
+            color: var(--muted);
+        }
+
+        .skill-sub {
+            margin-bottom: 10px;
+        }
+
+        .skill-sub:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-sub strong {
+            display: block;
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .skill-sub p {
+            margin: 0;
+            font-size: 8.5pt;
+        }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 10px;
+            font-size: 8.5pt;
+        }
+
+        /* ——— Right: header + main ——— */
+        .right-stack {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-bar {
+            position: relative;
+            min-height: 132px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 24px 32px 24px 24px;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .header-bar::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(var(--header-overlay), var(--header-overlay)),
+                url("bg-img.png") center / cover no-repeat;
+            z-index: 0;
+        }
+
+        .header-inner {
+            position: relative;
+            z-index: 1;
+            text-align: right;
+        }
+
+        .header-name {
+            margin: 0;
+            font-size: clamp(17px, 2.1vw, 21px);
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+
+        .header-role {
+            margin: 10px 0 0;
+            font-size: 9.5px;
+            font-weight: 600;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            opacity: 0.95;
+        }
+
+        main {
+            flex: 1;
+            padding: 28px 32px 36px 28px;
+            background: var(--main-bg);
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        main h2 {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--ink);
+            margin: 0 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--main-rule);
+        }
+
+        .section p {
+            margin: 0 0 10px;
+            font-size: 9.5pt;
+            text-align: left;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul.bullets {
+            margin: 0;
+            padding-left: 16px;
+        }
+
+        ul.bullets li {
+            margin-bottom: 5px;
+            font-size: 9.5pt;
+        }
+
+        ul.bullets li:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-title {
+            font-weight: 700;
+            font-size: 10.5pt;
+            margin-bottom: 4px;
+        }
+
+        .job-meta {
+            font-size: 9pt;
+            color: var(--muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .portfolio-link {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #1b3b5a;
+            color: #fff;
+            text-decoration: none;
+            font-size: 8.5pt;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .portfolio-link:hover {
+            background: #234b70;
+        }
+
+        .ref-block {
+            font-size: 9.5pt;
+            line-height: 1.55;
+        }
+
+        .ref-block p {
+            margin: 0 0 4px;
+            font-size: 9.5pt;
+        }
+
+        @media (max-width: 680px) {
+            .cv {
+                flex-direction: column;
+                min-height: unset;
+            }
+
+            .left-rail {
+                width: 100%;
+                border-radius: 0;
+            }
+
+            .photo-band {
+                height: 100px;
+            }
+
+            .avatar {
+                width: 120px;
+                height: 120px;
+                bottom: -56px;
+            }
+
+            .sidebar-inner {
+                padding-top: 72px;
+            }
+
+            .header-bar {
+                min-height: auto;
+                padding: 20px;
+                justify-content: center;
+            }
+
+            .header-inner {
+                text-align: center;
+            }
+
+            main {
+                padding: 24px 18px 32px;
+            }
+
+            .lang-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+            }
+
+            .page-wrap {
+                padding: 0;
+            }
+
+            .cv {
+                box-shadow: none;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrap">
+        <div class="cv">
+            <div class="left-rail">
+                <div class="photo-band">
+                    <img class="avatar" src="CV-img.png" width="144" height="144" alt="Alina Kotenko-Tymkiv">
+                </div>
+                <aside class="sidebar-inner" aria-label="Contact, education, and skills">
+                    <div class="sb-block">
+                        <h3 class="sb-title">Contact</h3>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            <a href="mailto:kotenko.alina@gmail.com">kotenko.alina@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                            <a href="tel:+421952600936">+421 952 600 936</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-4.5 7-11a7 7 0 10-14 0c0 6.5 7 11 7 11z"/><path d="M12 10a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
+                            <span>Bratislava, Slovak Republic</span>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                            <a href="https://t.me/AlinaKotenko" target="_blank" rel="noopener noreferrer">@AlinaKotenko</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg class="icon-fill" viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2V9zm2-4a2 2 0 114 0 2 2 0 01-4 0z"/></svg>
+                            <a href="https://www.linkedin.com/in/frontend-alina-kotenko-tymkiv" target="_blank" rel="noopener noreferrer">linkedin.com/in/frontend-alina-kotenko-tymkiv</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.68c-2.78.6-3.37-1.19-3.37-1.19-.45-1.16-1.1-1.46-1.1-1.46-.9-.62.07-.61.07-.61 1 .08 1.52 1.03 1.52 1.03.88 1.53 2.31 1.09 2.87.83.09-.65.35-1.09.63-1.34-2.22-.26-4.56-1.13-4.56-5.04 0-1.11.39-2.01 1.03-2.72-.1-.26-.45-1.29.1-2.69 0 0 .84-.27 2.75 1.04A9.44 9.44 0 0112 6.8c.85 0 1.7.12 2.5.35 1.9-1.31 2.74-1.04 2.74-1.04.56 1.4.21 2.43.11 2.69.64.71 1.03 1.61 1.03 2.72 0 3.92-2.34 4.78-4.58 5.03.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>
+                            <a href="https://github.com/Alina9782" target="_blank" rel="noopener noreferrer">github.com/Alina9782</a>
+                        </div>
+                    </div>
+
+                    <div class="sb-block">
+                        <h3 class="sb-title">Education</h3>
+                        <div class="edu-line">Bachelor of Computer Science</div>
+                        <div class="edu-place">Lviv Polytechnic National University, Lviv</div>
+                        <div class="edu-dates">Sep 2021 – May 2025</div>
+                    </div>
+
+                    <div class="sb-block">
+                        <h3 class="sb-title">Technical skills</h3>
+                        <div class="skill-sub">
+                            <strong>Languages &amp; core</strong>
+                            <p>HTML5, CSS3, SCSS/Sass, JavaScript (ES6+), TypeScript, SQL, Python</p>
+                        </div>
+                        <div class="skill-sub">
+                            <strong>Frameworks &amp; tools</strong>
+                            <p>React.js, Redux, RESTful APIs, Git, GitFlow, Figma, Chrome DevTools</p>
+                        </div>
+                        <div class="skill-sub">
+                            <strong>Other</strong>
+                            <p>Responsive web design, mobile-first UI, unit testing, performance optimization, Agile/Scrum, cross-browser compatibility</p>
+                        </div>
+                    </div>
+
+                    <div class="sb-block">
+                        <h3 class="sb-title">Languages</h3>
+                        <div class="lang-grid">
+                            <span>English – C2</span>
+                            <span>Ukrainian – C2</span>
+                            <span>Russian – C2</span>
+                            <span>Slovak – B1</span>
+                            <span>Polish – A2</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="right-stack">
+                <header class="header-bar">
+                    <div class="header-inner">
+                        <h1 class="header-name">Kotenko-Tymkiv Alina</h1>
+                        <p class="header-role">Front-End Developer</p>
+                    </div>
+                </header>
+
+                <main>
+                    <section class="section" aria-labelledby="h-summary">
+                        <h2 id="h-summary">Professional summary</h2>
+                        <p>
+                            Front-End Developer with 2,5+ years of commercial experience building responsive, high-performance web applications,
+                            landing pages, and conversion-focused marketing websites. Delivered 50+ pixel-perfect pages from Figma using HTML5,
+                            SCSS/Sass, JavaScript (ES6+), and TypeScript at a pace of 20-40 pages per month in a cross-functional team of ~20.
+                        </p>
+                        <p>
+                            Strong in React.js fundamentals, reusable UI components, REST API integration support, mobile-first and cross-browser
+                            development, and front-end performance optimization for low-bandwidth users. Proficient with Git/GitFlow and Agile/Scrum
+                            collaboration. Based in Bratislava and open to on-site or hybrid roles.
+                        </p>
+                    </section>
+
+                    <section class="section" aria-labelledby="h-courses">
+                        <h2 id="h-courses">Courses &amp; certifications</h2>
+                        <ul class="bullets">
+                            <li>Programming Foundations (JavaScript, HTML, CSS) — Duke University (2025)</li>
+                            <li>JavaScript Fundamentals — Kharkiv IT Cluster &amp; EPAM (May 2025 - Dec 2025)</li>
+                            <li>The Complete JavaScript Course — Udemy (2024)</li>
+                            <li>Fullstack Developer Program — GoIT (2023–2024)</li>
+                        </ul>
+                    </section>
+
+                    <section class="section" aria-labelledby="h-exp">
+                        <h2 id="h-exp">Experience</h2>
+                        <div class="job-title">Freelance Front-End Developer (part-time)</div>
+                        <div class="job-meta">Upwork, Fiverr, direct clients | Remote | Feb 2023 - Present</div>
+                        <ul class="bullets">
+                            <li>Designed and developed responsive landing pages and web interfaces for international clients via Upwork, Fiverr, and referrals.</li>
+                            <li>Translated business requirements and Figma mockups into pixel-perfect, cross-browser UI using HTML5, SCSS/Sass, and JavaScript.</li>
+                            <li>Managed end-to-end front-end delivery: requirements clarification, implementation, QA revisions, and production handoff.</li>
+                            <li>Optimized UX and page loading performance, driving repeat collaborations and long-term client relationships.</li>
+                        </ul>
+                        <div class="job-title" style="margin-top: 12px;">Front-End Developer</div>
+                        <div class="job-meta">116 PS Simple Traffic | Remote | Oct 2023 - Apr 2026</div>
+                        <ul class="bullets">
+                            <li>Delivered 50+ pixel-perfect landing pages and marketing websites from Figma, averaging 20-40 pages monthly.</li>
+                            <li>Built reusable JavaScript/TypeScript components and collaborated on React.js-based workflows.</li>
+                            <li>Implemented mobile-first, cross-browser layouts and improved front-end performance for low-bandwidth users.</li>
+                            <li>Partnered with designers, buyers, and stakeholders in a cross-functional Agile team to deliver under tight deadlines.</li>
+                            <li>Maintained code quality, branch strategy, and release consistency using Git and GitFlow.</li>
+                        </ul>
+                    </section>
+
+                    <section class="section" aria-labelledby="h-extra">
+                        <h2 id="h-extra">Interests</h2>
+                        <ul class="bullets">
+                            <li>Traveling, language learning, and cross-cultural communication.</li>
+                        </ul>
+                    </section>
+
+                    <section class="section" aria-labelledby="h-additional">
+                        <h2 id="h-additional">Additional information</h2>
+                        <ul class="bullets">
+                            <li>Driving license: Category B.</li>
+                            <li>Available for on-site or hybrid roles in Bratislava.</li>
+                        </ul>
+                    </section>
+
+                    <section class="section" aria-labelledby="h-portfolio">
+                        <h2 id="h-portfolio">Portfolio</h2>
+                        <p>
+                            Selected front-end projects, landing pages, and implementation examples are available on my dedicated portfolio page.
+                        </p>
+                        <a class="portfolio-link" href="portfolio.html">Open Portfolio</a>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
