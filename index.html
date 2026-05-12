@@ -50,29 +50,22 @@
             width: 100%;
             max-width: 794px;
             min-height: 1123px;
-            display: flex;
+            display: grid;
+            grid-template-columns: minmax(220px, 32%) 1fr;
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                "photo header"
+                "sidebar main";
             background: var(--main-bg);
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
             border-radius: 16px;
             overflow: hidden;
         }
 
-        /* ——— Left rail: photo band + blue sidebar ——— */
-        .left-rail {
-            width: 32%;
-            min-width: 220px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            background: var(--sidebar-blue);
-            border-radius: 0;
-            overflow: hidden;
-        }
-
         .photo-band {
+            grid-area: photo;
             position: relative;
             height: 132px;
-            flex-shrink: 0;
             background: var(--sidebar-blue);
         }
 
@@ -92,9 +85,10 @@
         }
 
         .sidebar-inner {
-            flex: 1;
+            grid-area: sidebar;
             padding: 88px 18px 28px 18px;
             color: var(--sidebar-text);
+            background: var(--sidebar-blue);
         }
 
         .sb-block {
@@ -204,18 +198,10 @@
             font-size: 8.5pt;
         }
 
-        /* ——— Right: header + main ——— */
-        .right-stack {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
         .header-bar {
+            grid-area: header;
             position: relative;
             min-height: 132px;
-            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -259,7 +245,8 @@
         }
 
         main {
-            flex: 1;
+            grid-area: main;
+            min-width: 0;
             padding: 28px 32px 36px 28px;
             background: var(--main-bg);
         }
@@ -350,13 +337,14 @@
 
         @media (max-width: 680px) {
             .cv {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                grid-template-areas:
+                    "photo"
+                    "header"
+                    "sidebar"
+                    "main";
                 min-height: unset;
-            }
-
-            .left-rail {
-                width: 100%;
-                border-radius: 0;
             }
 
             .photo-band {
@@ -370,12 +358,12 @@
             }
 
             .sidebar-inner {
-                padding-top: 72px;
+                padding: 28px 18px 32px;
             }
 
             .header-bar {
                 min-height: auto;
-                padding: 20px;
+                padding: 72px 20px 20px;
                 justify-content: center;
             }
 
@@ -411,11 +399,16 @@
 <body>
     <div class="page-wrap">
         <div class="cv">
-            <div class="left-rail">
-                <div class="photo-band">
-                    <img class="avatar" src="CV-img.png" width="144" height="144" alt="Alina Kotenko-Tymkiv">
+            <div class="photo-band">
+                <img class="avatar" src="CV-img.png" width="144" height="144" alt="Alina Kotenko-Tymkiv">
+            </div>
+            <header class="header-bar">
+                <div class="header-inner">
+                    <h1 class="header-name">Kotenko-Tymkiv Alina</h1>
+                    <p class="header-role">Front-End Developer</p>
                 </div>
-                <aside class="sidebar-inner" aria-label="Contact, education, and skills">
+            </header>
+            <aside class="sidebar-inner" aria-label="Contact, education, and skills">
                     <div class="sb-block">
                         <h3 class="sb-title">Contact</h3>
                         <div class="contact-item">
@@ -478,17 +471,8 @@
                         </div>
                     </div>
                 </aside>
-            </div>
 
-            <div class="right-stack">
-                <header class="header-bar">
-                    <div class="header-inner">
-                        <h1 class="header-name">Kotenko-Tymkiv Alina</h1>
-                        <p class="header-role">Front-End Developer</p>
-                    </div>
-                </header>
-
-                <main>
+            <main>
                     <section class="section" aria-labelledby="h-summary">
                         <h2 id="h-summary">Professional summary</h2>
                         <p>
@@ -557,7 +541,6 @@
                         <a class="portfolio-link" href="portfolio.html">Open Portfolio</a>
                     </section>
                 </main>
-            </div>
         </div>
     </div>
 </body>
